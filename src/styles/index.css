@@ -1,0 +1,45 @@
+/* mobile first */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  width: 100%;
+}
+
+.header-image {
+  /* background-image: url("books.jpg"); */
+  filter: blur(1px);
+  filter: drop-shadow(10);
+  height: 200px;
+  width: 100%;
+  display: flex;
+  color: white;
+}
+
+main {
+  display: flex;
+  padding: 3rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+button {
+  cursor: pointer;
+  text-transform: capitalize;
+}
