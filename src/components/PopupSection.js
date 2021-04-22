@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import FormSection from "./FormSection";
+
 const PopupSection = () => {
   return (
     <>
       <Popup>
         <h2>Modify Book</h2>
         <BookIdStyle>Book ID: 23WD4R</BookIdStyle>
-        {/* render form here */}
+        <FormSection />
         <CloseButton>close</CloseButton>
       </Popup>
       <Overlay />

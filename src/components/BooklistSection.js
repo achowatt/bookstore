@@ -1,13 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import BookDetails from "./BookDetails";
+import data from "../data";
 
 const BooklistSection = () => {
+  const bookData = data();
+
   return (
     <BookListContainer>
       <h2>Book List</h2>
       <ul class="book-list">
-        <BookDetails />
+        {bookData.map((book) => (
+          <BookDetails
+            key={book.id}
+            id={book.id}
+            name={book.name}
+            price={book.price}
+            category={book.category}
+            description={book.description}
+          />
+        ))}
       </ul>
     </BookListContainer>
   );

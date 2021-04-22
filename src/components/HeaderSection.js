@@ -4,9 +4,7 @@ import styled from "styled-components";
 const HeaderSection = () => {
   return (
     <header>
-      <HeaderBackground>
-        <h1>Book Store</h1>
-      </HeaderBackground>
+      <HeaderBackground></HeaderBackground>
     </header>
   );
 };
@@ -19,6 +17,7 @@ const HeaderBackground = styled.div`
   width: 100%;
   display: flex;
   color: white;
+  background: rgb(255 223 176);
 `;
 
 export default HeaderSection;

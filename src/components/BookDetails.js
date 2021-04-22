@@ -2,21 +2,16 @@ import React from "react";
 import { CardButtons } from "../styles/mixinStyle";
 import styled from "styled-components";
 
-const BookDetails = () => {
+const BookDetails = ({ id, name, price, category, description }) => {
   return (
-    <BookInfoCard>
+    <BookInfoCard id={id}>
       <div class="wrapper">
         <div class="book-info">
-          <h4>Book Name</h4>
-          <p>Category</p>
-          <p class="price">Price</p>
+          <h4>{name}</h4>
+          <p>{category}</p>
+          <p class="price">${price}</p>
         </div>
-        <div class="book-description">
-          Description: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Reprehenderit eveniet iusto soluta nobis doloremque ipsa cumque
-          adipisci, dolore sit tempora distinctio. Commodi possimus facere
-          inventore? Adipisci explicabo incidunt ut totam.
-        </div>
+        <div class="book-description">{description}</div>
       </div>
 
       <div className="modify-delete-container">

@@ -12,10 +12,9 @@ body {
   justify-content: center;
 }
 
-.App {
+#root {
   width: 100%;
 }
-
 .header-image {
   /* background-image: url("books.jpg"); */
   filter: blur(1px);

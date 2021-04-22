@@ -13,12 +13,12 @@ const AddButton = styled.button`
   padding: 0 1rem;
   height: 4rem;
   border: none;
-  background: rgb(255, 158, 13);
+  background: #ffc107e8;
   font-size: 1.5rem;
   color: white;
   border-radius: 4px;
   position: fixed;
-  top: 250px;
+  bottom: 250px;
   right: 1rem;
 `;
 
