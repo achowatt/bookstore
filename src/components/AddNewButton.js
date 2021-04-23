@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const AddNewButton = () => {
-  return <AddButton> + New </AddButton>;
+const AddNewButton = ({ setAddingNew }) => {
+  return <AddButton onClick={() => setAddingNew(true)}> + New </AddButton>;
 };
 
 const AddButton = styled.button`
@@ -20,6 +20,10 @@ const AddButton = styled.button`
   position: fixed;
   bottom: 250px;
   right: 1rem;
+
+  &:hover {
+    background: #ffb007;
+  }
 `;
 
 export default AddNewButton;

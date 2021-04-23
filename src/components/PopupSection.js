@@ -3,16 +3,41 @@ import styled from "styled-components";
 
 import FormSection from "./FormSection";
 
-const PopupSection = () => {
+const PopupSection = ({
+  setModifying,
+  setAddingNew,
+  currentBook,
+  setCurrentBook,
+  currentBookList,
+  setCurrentBookList,
+}) => {
+  const removePopup = () => {
+    setModifying(false);
+    setAddingNew(false);
+    setCurrentBook({
+      id: "",
+      name: "",
+      price: "",
+      category: "",
+      description: "",
+    });
+  };
   return (
     <>
       <Popup>
-        <h2>Modify Book</h2>
-        <BookIdStyle>Book ID: 23WD4R</BookIdStyle>
-        <FormSection />
-        <CloseButton>close</CloseButton>
+        <h2>{currentBook.id ? "Modify Book" : "Add New Book"}</h2>
+        {currentBook.id && <BookIdStyle>Book ID: {currentBook.id}</BookIdStyle>}
+        <FormSection
+          currentBook={currentBook}
+          setCurrentBook={setCurrentBook}
+          currentBookList={currentBookList}
+          setCurrentBookList={setCurrentBookList}
+          setModifying={setModifying}
+          setAddingNew={setAddingNew}
+        />
+        <CloseButton onClick={removePopup}>close</CloseButton>
       </Popup>
-      <Overlay />
+      <Overlay onClick={removePopup} />
     </>
   );
 };
@@ -27,8 +52,9 @@ const Popup = styled.section`
   max-width: 90%;
 
   position: fixed;
-  height: 100vh;
-  top: 0;
+  height: 90%;
+  min-height: fit-content;
+  top: 5%;
   right: 0;
 
   background: white;
@@ -37,8 +63,6 @@ const Popup = styled.section`
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   text-align: center;
-
-  display: none;
 `;
 
 const BookIdStyle = styled.p`
@@ -46,7 +70,6 @@ const BookIdStyle = styled.p`
 `;
 
 const Overlay = styled.div`
-  display: none;
   top: 0;
   left: 0;
   position: fixed;

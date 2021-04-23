@@ -2,20 +2,38 @@ import React from "react";
 import { CardButtons } from "../styles/mixinStyle";
 import styled from "styled-components";
 
-const BookDetails = ({ id, name, price, category, description }) => {
+const BookDetails = ({
+  id,
+  name,
+  price,
+  category,
+  description,
+  setModifying,
+  setCurrentBook,
+}) => {
+  const modify = () => {
+    setModifying(true);
+    setCurrentBook({
+      id,
+      name,
+      category,
+      price,
+      description,
+    });
+  };
   return (
     <BookInfoCard id={id}>
-      <div class="wrapper">
-        <div class="book-info">
+      <div className="wrapper">
+        <div className="book-info">
           <h4>{name}</h4>
           <p>{category}</p>
-          <p class="price">${price}</p>
+          <p className="price">${price}</p>
         </div>
-        <div class="book-description">{description}</div>
+        <div className="book-description">{description}</div>
       </div>
 
       <div className="modify-delete-container">
-        <ModifyButton>Modify</ModifyButton>
+        <ModifyButton onClick={modify}>Modify</ModifyButton>
         <DeleteButton>Delete</DeleteButton>
       </div>
     </BookInfoCard>

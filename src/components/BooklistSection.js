@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import BookDetails from "./BookDetails";
-import data from "../data";
 
-const BooklistSection = () => {
-  const bookData = data();
-
+const BooklistSection = ({ setModifying, setCurrentBook, currentBookList }) => {
   return (
     <BookListContainer>
       <h2>Book List</h2>
-      <ul class="book-list">
-        {bookData.map((book) => (
+      <ul className="book-list">
+        {currentBookList.map((book) => (
           <BookDetails
             key={book.id}
             id={book.id}
@@ -18,6 +15,8 @@ const BooklistSection = () => {
             price={book.price}
             category={book.category}
             description={book.description}
+            setModifying={setModifying}
+            setCurrentBook={setCurrentBook}
           />
         ))}
       </ul>
