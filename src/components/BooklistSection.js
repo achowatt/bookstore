@@ -2,24 +2,38 @@ import React from "react";
 import styled from "styled-components";
 import BookDetails from "./BookDetails";
 
-const BooklistSection = ({ setModifying, setCurrentBook, currentBookList }) => {
+const BooklistSection = ({
+  setModifying,
+  setCurrentBook,
+  currentBookList,
+  setCurrentBookList,
+}) => {
   return (
     <BookListContainer>
       <h2>Book List</h2>
-      <ul className="book-list">
-        {currentBookList.map((book) => (
-          <BookDetails
-            key={book.id}
-            id={book.id}
-            name={book.name}
-            price={book.price}
-            category={book.category}
-            description={book.description}
-            setModifying={setModifying}
-            setCurrentBook={setCurrentBook}
-          />
-        ))}
-      </ul>
+      {currentBookList.length > 0 && (
+        <ul className="book-list">
+          {currentBookList.map((book) => (
+            <BookDetails
+              key={book.id}
+              id={book.id}
+              name={book.name}
+              price={book.price}
+              category={book.category}
+              description={book.description}
+              setModifying={setModifying}
+              setCurrentBook={setCurrentBook}
+              currentBookList={currentBookList}
+              setCurrentBookList={setCurrentBookList}
+            />
+          ))}
+        </ul>
+      )}
+      {currentBookList.length === 0 && (
+        <p>
+          There are currently no books in the store. To update, click + New.
+        </p>
+      )}
     </BookListContainer>
   );
 };

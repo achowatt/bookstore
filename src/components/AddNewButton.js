@@ -13,16 +13,16 @@ const AddButton = styled.button`
   padding: 0 1rem;
   height: 4rem;
   border: none;
-  background: #ffc107e8;
+  background: #e84545c7;
   font-size: 1.5rem;
   color: white;
   border-radius: 4px;
   position: fixed;
-  bottom: 250px;
+  bottom: 7%;
   right: 1rem;
 
   &:hover {
-    background: #ffb007;
+    background: #e84545;
   }
 `;
 

@@ -55,9 +55,9 @@ const Popup = styled.section`
   height: 90%;
   min-height: fit-content;
   top: 5%;
-  right: 0;
+  right: 0.5rem;
 
-  background: white;
+  background: #ffffed;
   z-index: 5;
 
   border-top-left-radius: 15px;
@@ -67,6 +67,7 @@ const Popup = styled.section`
 
 const BookIdStyle = styled.p`
   margin-bottom: 2rem;
+  font-size: 0.9rem;
 `;
 
 const Overlay = styled.div`

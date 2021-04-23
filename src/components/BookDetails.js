@@ -10,8 +10,10 @@ const BookDetails = ({
   description,
   setModifying,
   setCurrentBook,
+  currentBookList,
+  setCurrentBookList,
 }) => {
-  const modify = () => {
+  const modifyBook = () => {
     setModifying(true);
     setCurrentBook({
       id,
@@ -21,20 +23,26 @@ const BookDetails = ({
       description,
     });
   };
+
+  const deleteBook = () => {
+    const updateBookList = currentBookList.filter((book) => book.id !== id);
+    setCurrentBookList(updateBookList);
+  };
+
   return (
     <BookInfoCard id={id}>
       <div className="wrapper">
         <div className="book-info">
           <h4>{name}</h4>
-          <p>{category}</p>
-          <p className="price">${price}</p>
+          <p className="category">{category}</p>
+          <p className="price">$ {price}</p>
         </div>
         <div className="book-description">{description}</div>
       </div>
 
       <div className="modify-delete-container">
-        <ModifyButton onClick={modify}>Modify</ModifyButton>
-        <DeleteButton>Delete</DeleteButton>
+        <ModifyButton onClick={modifyBook}>Modify</ModifyButton>
+        <DeleteButton onClick={deleteBook}>Delete</DeleteButton>
       </div>
     </BookInfoCard>
   );
@@ -43,7 +51,7 @@ const BookDetails = ({
 const BookInfoCard = styled.li`
   box-shadow: 2px 0px 14px rgb(0 0 0 / 10%);
   border-radius: 5px;
-  background: white;
+  background: #fffff6;
 
   .book-info {
     display: flex;
@@ -57,6 +65,10 @@ const BookInfoCard = styled.li`
     position: relative;
   }
 
+  .category {
+    color: #4e4e4e;
+  }
+
   .book-description {
     position: absolute;
     width: 100%;
@@ -64,7 +76,7 @@ const BookInfoCard = styled.li`
     top: 0;
     display: grid;
     place-items: center;
-    background: white;
+    background: #fffff6;
     padding: 1rem;
     visibility: hidden;
     opacity: 0;
@@ -86,8 +98,8 @@ const BookInfoCard = styled.li`
     position: absolute;
     top: 10px;
     right: 10px;
-    background: #ffb2b2;
-    padding: 5px;
+    padding: 4px 9px;
+    color: #c53737;
   }
 
   .modify-delete-container {

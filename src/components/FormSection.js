@@ -47,6 +47,10 @@ const FormSection = ({
 
   const submitHandler = (e) => {
     e.preventDefault();
+    //Add form validation
+    //
+    //
+
     const bookIndex = currentBookList.findIndex(
       (book) => book.id === currentBook.id
     );
@@ -76,13 +80,14 @@ const FormSection = ({
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler}>
       <Label htmlFor="modify-book-name">Book Name</Label>
       <Input
         type="text"
         id="modify-book-name"
         value={inputName}
         onChange={editNameHandler}
+        required
       />
 
       <br />
@@ -93,6 +98,7 @@ const FormSection = ({
         id="modify-book-price"
         value={inputPrice}
         onChange={editPriceHandler}
+        required
       />
 
       <br />
@@ -103,50 +109,75 @@ const FormSection = ({
         id="modify-book-category"
         value={categoryOption}
         onChange={editCategoryHandler}
+        required
       >
+        <option value="">Select a category</option>
         <option value="Fiction">Fiction</option>
         <option value="Non-Fiction">Non-Fiction</option>
         <option value="Cookbooks">Cookbooks</option>
         <option value="Kidsbooks">Kids Books</option>
+        <option value="Other">Other</option>
       </Select>
 
       <Label htmlFor="modify-book-description">Description</Label>
-      <textarea
+      <Textarea
+        id="modify-book-description"
         value={inputDescription}
         onChange={editDescriptionHandler}
-      ></textarea>
+        required
+      ></Textarea>
       <br />
 
       <ApplyButton type="submit">Apply</ApplyButton>
-    </form>
+    </Form>
   );
 };
 
-const maxwidth = "80%";
+const Form = styled.form`
+  width: 20rem;
+  max-width: 100%;
+  padding: 1rem;
+`;
 
 const Label = styled.label`
   display: block;
   margin-bottom: 0.3rem;
+  font-size: 1.3rem;
 `;
 
 const Input = styled.input`
-  margin-bottom: 1rem;
-  height: 1.5rem;
-  width: 20rem;
-  max-width: ${maxwidth};
+  margin-bottom: 1.7rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+  width: 100%;
+  border: solid 1px #ababab;
 `;
 
 const Select = styled.select`
   margin-bottom: 1rem;
-  height: 1.5rem;
-  width: 20rem;
-  max-width: ${maxwidth};
+  height: 2rem;
+  width: 100%;
+  border: solid 1px #ababab;
+  padding: 0.5rem;
 `;
 
+const Textarea = styled.textarea`
+  resize: none;
+  height: 6rem;
+  width: 100%;
+  border: solid 1px #ababab;
+  padding: 0.5rem;
+`;
 const ApplyButton = styled.button`
   margin-top: 1rem;
-  width: 20rem;
-  padding: 0.5rem 0;
-  max-width: ${maxwidth};
+  padding: 0.7rem 0;
+  width: 100%;
+  background: #232946;
+  color: white;
+  border: none;
+
+  &:hover {
+    background: #e84545;
+  }
 `;
 export default FormSection;

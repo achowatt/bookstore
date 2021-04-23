@@ -8,6 +8,6 @@ export const CardButtons = styled.button`
   color: white;
 
   &:hover {
-    background: #9ea7ce;
+    background: #e84545;
   }
 `;
