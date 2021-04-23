@@ -1,8 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const AddNewButton = ({ setAddingNew }) => {
-  return <AddButton onClick={() => setAddingNew(true)}> + New </AddButton>;
+const AddNewButton = ({ setAddingNew, footerShowing }) => {
+  return (
+    <AddButton
+      className={footerShowing ? "absolute" : "fixed"}
+      onClick={() => setAddingNew(true)}
+    >
+      {" "}
+      + New{" "}
+    </AddButton>
+  );
 };
 
 const AddButton = styled.button`
@@ -17,9 +25,17 @@ const AddButton = styled.button`
   font-size: 1.5rem;
   color: white;
   border-radius: 4px;
-  position: fixed;
-  bottom: 7%;
   right: 1rem;
+
+  &.fixed {
+    position: fixed;
+    bottom: 4rem;
+  }
+
+  &.absolute {
+    position: absolute;
+    bottom: 4rem;
+  }
 
   &:hover {
     background: #e84545;

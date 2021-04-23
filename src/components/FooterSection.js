@@ -2,9 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import Logo2 from "../Logo2.svg";
 
-const FooterSection = () => {
+import { useInView } from "react-intersection-observer";
+
+const FooterSection = ({ setFooterShowing }) => {
+  const [element, view] = useInView({ threshold: 0 });
+
+  if (view) {
+    setFooterShowing(view);
+  } else {
+    setFooterShowing(view);
+  }
+
   return (
-    <Footer>
+    <Footer ref={element}>
       <img src={Logo2} alt="Built and Designed by Anna Chowattanakul" />
     </Footer>
   );

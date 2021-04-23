@@ -22,6 +22,7 @@ function App() {
     description: "",
   });
   const [currentBookList, setCurrentBookList] = useState(data());
+  const [footerShowing, setFooterShowing] = useState(false);
 
   return (
     <AppStyle>
@@ -43,9 +44,12 @@ function App() {
             setCurrentBookList={setCurrentBookList}
           />
         )}
-        <AddNewButton setAddingNew={setAddingNew} />
+        <AddNewButton
+          setAddingNew={setAddingNew}
+          footerShowing={footerShowing}
+        />
       </main>
-      <FooterSection />
+      <FooterSection setFooterShowing={setFooterShowing} />
     </AppStyle>
   );
 }
@@ -57,9 +61,11 @@ const AppStyle = styled.div`
     display: flex;
     padding: 3rem;
     padding-bottom: 7rem;
-    /* margin-top: -5rem; */
+    position: relative;
+    min-height: calc(100vh - 40rem);
     @media screen and (max-width: 700px) {
       padding: 1rem;
+      padding-bottom: 2.5rem;
     }
   }
 `;
