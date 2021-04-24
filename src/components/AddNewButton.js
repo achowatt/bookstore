@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
-const AddNewButton = ({ setAddingNew, footerShowing }) => {
+const AddNewButton = ({ footerShowing }) => {
+  const dispatch = useDispatch();
   return (
     <AddButton
       className={footerShowing ? "absolute" : "fixed"}
-      onClick={() => setAddingNew(true)}
+      onClick={() => dispatch({ type: "ADDING_NEW" })}
     >
       {" "}
       + New{" "}

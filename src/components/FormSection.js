@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 
+//Redux
+import { useDispatch } from "react-redux";
+
 const FormSection = ({
   currentBook,
   setCurrentBook,
   currentBookList,
   setCurrentBookList,
-  setModifying,
-  setAddingNew,
 }) => {
   const [inputName, setInputName] = useState(currentBook.name);
   const [inputPrice, setInputPrice] = useState(currentBook.price);
@@ -16,6 +17,9 @@ const FormSection = ({
   const [inputDescription, setInputDescription] = useState(
     currentBook.description
   );
+
+  //REDUX
+  const dispatch = useDispatch();
 
   const editNameHandler = (e) => {
     setInputName(e.target.value);
@@ -34,8 +38,9 @@ const FormSection = ({
   };
 
   const removePopup = () => {
-    setModifying(false);
-    setAddingNew(false);
+    dispatch({ type: "MODIFYING_CLOSED" });
+    dispatch({ type: "ADDING_NEW_CLOSED" });
+
     setCurrentBook({
       id: "",
       name: "",
@@ -62,8 +67,6 @@ const FormSection = ({
         category: categoryOption,
         description: inputDescription,
       };
-      //Notify Update
-      console.log(`UPDATE: You've successfully modified book: ${inputName}`);
     } else {
       const newBook = {
         id: uuidv4(),
@@ -73,8 +76,6 @@ const FormSection = ({
         description: inputDescription,
       };
       setCurrentBookList([...currentBookList, newBook]);
-      //Notify Update
-      console.log(`UPDATE: You've successfully added a book: ${inputName}`);
     }
     removePopup();
   };

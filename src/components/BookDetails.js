@@ -2,19 +2,22 @@ import React from "react";
 import { CardButtons } from "../styles/mixinStyle";
 import styled from "styled-components";
 
+//REDUX
+import { useDispatch } from "react-redux";
+import { deleteAction } from "../actions/updatedBookList";
 const BookDetails = ({
   id,
   name,
   price,
   category,
   description,
-  setModifying,
   setCurrentBook,
-  currentBookList,
-  setCurrentBookList,
 }) => {
+  //REDUX
+  const dispatch = useDispatch();
+
   const modifyBook = () => {
-    setModifying(true);
+    dispatch({ type: "MODIFYING" });
     setCurrentBook({
       id,
       name,
@@ -25,8 +28,7 @@ const BookDetails = ({
   };
 
   const deleteBook = () => {
-    const updateBookList = currentBookList.filter((book) => book.id !== id);
-    setCurrentBookList(updateBookList);
+    dispatch(deleteAction(id));
   };
 
   return (

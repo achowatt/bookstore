@@ -3,17 +3,20 @@ import styled from "styled-components";
 
 import FormSection from "./FormSection";
 
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
+
 const PopupSection = ({
-  setModifying,
-  setAddingNew,
   currentBook,
   setCurrentBook,
   currentBookList,
   setCurrentBookList,
 }) => {
+  const dispatch = useDispatch();
+  const modifying = useSelector((state) => state.modifying);
   const removePopup = () => {
-    setModifying(false);
-    setAddingNew(false);
+    dispatch({ type: "MODIFYING_CLOSED" });
+    dispatch({ type: "ADDING_NEW_CLOSED" });
     setCurrentBook({
       id: "",
       name: "",
@@ -25,15 +28,13 @@ const PopupSection = ({
   return (
     <>
       <Popup>
-        <h2>{currentBook.id ? "Modify Book" : "Add New Book"}</h2>
+        <h2>{modifying ? "Modify Book" : "Add New Book"}</h2>
         {currentBook.id && <BookIdStyle>Book ID: {currentBook.id}</BookIdStyle>}
         <FormSection
           currentBook={currentBook}
           setCurrentBook={setCurrentBook}
           currentBookList={currentBookList}
           setCurrentBookList={setCurrentBookList}
-          setModifying={setModifying}
-          setAddingNew={setAddingNew}
         />
         <CloseButton onClick={removePopup}>close</CloseButton>
       </Popup>

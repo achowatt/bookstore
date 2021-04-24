@@ -8,12 +8,10 @@ import BooklistSection from "./components/BooklistSection";
 import HeaderSection from "./components/HeaderSection";
 import FooterSection from "./components/FooterSection";
 
-//Book List
-import data from "./data";
+//REDUX
+import { useSelector } from "react-redux";
 
 function App() {
-  const [modifying, setModifying] = useState(false);
-  const [addingNew, setAddingNew] = useState(false);
   const [currentBook, setCurrentBook] = useState({
     id: "",
     name: "",
@@ -21,33 +19,24 @@ function App() {
     category: "",
     description: "",
   });
-  const [currentBookList, setCurrentBookList] = useState(data());
   const [footerShowing, setFooterShowing] = useState(false);
+
+  //AddingNew
+  const addingNew = useSelector((state) => state.addingNew);
+  const modifying = useSelector((state) => state.modifying);
 
   return (
     <AppStyle>
       <HeaderSection />
       <main>
-        <BooklistSection
-          setModifying={setModifying}
-          setCurrentBook={setCurrentBook}
-          currentBookList={currentBookList}
-          setCurrentBookList={setCurrentBookList}
-        />
+        <BooklistSection setCurrentBook={setCurrentBook} />
         {(modifying || addingNew) && (
           <PopupSection
-            setModifying={setModifying}
-            setAddingNew={setAddingNew}
             currentBook={currentBook}
             setCurrentBook={setCurrentBook}
-            currentBookList={currentBookList}
-            setCurrentBookList={setCurrentBookList}
           />
         )}
-        <AddNewButton
-          setAddingNew={setAddingNew}
-          footerShowing={footerShowing}
-        />
+        <AddNewButton footerShowing={footerShowing} />
       </main>
       <FooterSection setFooterShowing={setFooterShowing} />
     </AppStyle>

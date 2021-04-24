@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import BookDetails from "./BookDetails";
 
-const BooklistSection = ({
-  setModifying,
-  setCurrentBook,
-  currentBookList,
-  setCurrentBookList,
-}) => {
+//Redux
+import { useSelector } from "react-redux";
+
+const BooklistSection = ({ setCurrentBook }) => {
+  //FETCH GAMES
+  const currentBookList = useSelector((state) => state.updatedBookList);
   return (
     <BookListContainer>
       <h2>Book List</h2>
@@ -21,10 +21,7 @@ const BooklistSection = ({
               price={book.price}
               category={book.category}
               description={book.description}
-              setModifying={setModifying}
               setCurrentBook={setCurrentBook}
-              currentBookList={currentBookList}
-              setCurrentBookList={setCurrentBookList}
             />
           ))}
         </ul>
