@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
 
 //Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewAction, modifyAction } from "../actions/bookList";
 
-const FormSection = ({
-  currentBook,
-  setCurrentBook,
-  currentBookList,
-  setCurrentBookList,
-}) => {
-  const [inputName, setInputName] = useState(currentBook.name);
-  const [inputPrice, setInputPrice] = useState(currentBook.price);
-  const [categoryOption, setCategoryOption] = useState(currentBook.category);
-  const [inputDescription, setInputDescription] = useState(
-    currentBook.description
-  );
-
+const FormSection = ({ currentBookID, setCurrentBookID, setPopupOpen }) => {
   //REDUX
   const dispatch = useDispatch();
+  const existingBook = useSelector((state) =>
+    state.bookList.filter((book) => book.id === currentBookID)
+  );
+
+  //Initialize Existing Book Info
+
+  const bookName = existingBook.length !== 0 ? existingBook[0].name : "";
+  const bookPrice = existingBook.length !== 0 ? existingBook[0].price : "";
+  const bookCategory =
+    existingBook.length !== 0 ? existingBook[0].category : "";
+  const bookDescription =
+    existingBook.length !== 0 ? existingBook[0].description : "";
+
+  //LOCAL STATES
+  const [inputName, setInputName] = useState(bookName);
+  const [inputPrice, setInputPrice] = useState(bookPrice);
+  const [categoryOption, setCategoryOption] = useState(bookCategory);
+  const [inputDescription, setInputDescription] = useState(bookDescription);
 
   const editNameHandler = (e) => {
     setInputName(e.target.value);
@@ -38,44 +44,32 @@ const FormSection = ({
   };
 
   const removePopup = () => {
-    dispatch({ type: "MODIFYING_CLOSED" });
-    dispatch({ type: "ADDING_NEW_CLOSED" });
-
-    setCurrentBook({
-      id: "",
-      name: "",
-      price: "",
-      category: "",
-      description: "",
-    });
+    setPopupOpen(false);
+    setCurrentBookID("");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //Add form validation
-    //
-    //
 
-    const bookIndex = currentBookList.findIndex(
-      (book) => book.id === currentBook.id
-    );
-    if (bookIndex !== -1) {
-      currentBookList[bookIndex] = {
-        id: currentBook.id,
-        name: inputName,
-        price: inputPrice,
-        category: categoryOption,
-        description: inputDescription,
-      };
+    if (currentBookID) {
+      dispatch(
+        modifyAction({
+          id: currentBookID,
+          name: inputName,
+          price: inputPrice,
+          category: categoryOption,
+          description: inputDescription,
+        })
+      );
     } else {
-      const newBook = {
-        id: uuidv4(),
-        name: inputName,
-        price: inputPrice,
-        category: categoryOption,
-        description: inputDescription,
-      };
-      setCurrentBookList([...currentBookList, newBook]);
+      dispatch(
+        addNewAction({
+          name: inputName,
+          price: inputPrice,
+          category: categoryOption,
+          description: inputDescription,
+        })
+      );
     }
     removePopup();
   };
@@ -95,7 +89,7 @@ const FormSection = ({
 
       <Label htmlFor="modify-book-price">Price</Label>
       <Input
-        type="text"
+        type="number"
         id="modify-book-price"
         value={inputPrice}
         onChange={editPriceHandler}

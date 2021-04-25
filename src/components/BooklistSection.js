@@ -5,9 +5,9 @@ import BookDetails from "./BookDetails";
 //Redux
 import { useSelector } from "react-redux";
 
-const BooklistSection = ({ setCurrentBook }) => {
+const BooklistSection = ({ setCurrentBookID, setPopupOpen }) => {
   //FETCH GAMES
-  const currentBookList = useSelector((state) => state.updatedBookList);
+  const currentBookList = useSelector((state) => state.bookList);
   return (
     <BookListContainer>
       <h2>Book List</h2>
@@ -16,12 +16,9 @@ const BooklistSection = ({ setCurrentBook }) => {
           {currentBookList.map((book) => (
             <BookDetails
               key={book.id}
-              id={book.id}
-              name={book.name}
-              price={book.price}
-              category={book.category}
-              description={book.description}
-              setCurrentBook={setCurrentBook}
+              book={book}
+              setCurrentBookID={setCurrentBookID}
+              setPopupOpen={setPopupOpen}
             />
           ))}
         </ul>
@@ -39,6 +36,10 @@ const BookListContainer = styled.section`
   width: 100%;
   padding: 1rem;
   text-align: center;
+
+  @media screen and (max-width: 700px) {
+    padding: 0rem;
+  }
 
   h2 {
     margin-bottom: 3rem;

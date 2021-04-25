@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Logo2 from "../Logo2.svg";
 
@@ -7,11 +7,9 @@ import { useInView } from "react-intersection-observer";
 const FooterSection = ({ setFooterShowing }) => {
   const [element, view] = useInView({ threshold: 0 });
 
-  if (view) {
+  useEffect(() => {
     setFooterShowing(view);
-  } else {
-    setFooterShowing(view);
-  }
+  }, [setFooterShowing, view]);
 
   return (
     <Footer ref={element}>

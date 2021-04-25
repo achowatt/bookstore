@@ -4,42 +4,30 @@ import styled from "styled-components";
 
 //REDUX
 import { useDispatch } from "react-redux";
-import { deleteAction } from "../actions/updatedBookList";
-const BookDetails = ({
-  id,
-  name,
-  price,
-  category,
-  description,
-  setCurrentBook,
-}) => {
+import { deleteAction } from "../actions/bookList";
+
+const BookDetails = ({ book, setCurrentBookID, setPopupOpen }) => {
   //REDUX
   const dispatch = useDispatch();
 
   const modifyBook = () => {
-    dispatch({ type: "MODIFYING" });
-    setCurrentBook({
-      id,
-      name,
-      category,
-      price,
-      description,
-    });
+    setPopupOpen(true);
+    setCurrentBookID(book.id);
   };
 
   const deleteBook = () => {
-    dispatch(deleteAction(id));
+    dispatch(deleteAction(book.id));
   };
 
   return (
-    <BookInfoCard id={id}>
+    <BookInfoCard>
       <div className="wrapper">
         <div className="book-info">
-          <h4>{name}</h4>
-          <p className="category">{category}</p>
-          <p className="price">$ {price}</p>
+          <h4>{book.name}</h4>
+          <p className="category">{book.category}</p>
+          <p className="price">$ {book.price}</p>
         </div>
-        <div className="book-description">{description}</div>
+        <div className="book-description">{book.description}</div>
       </div>
 
       <div className="modify-delete-container">
@@ -65,6 +53,7 @@ const BookInfoCard = styled.li`
     border-top-right-radius: 5px;
     border-bottom: none;
     position: relative;
+    padding: 0.5rem;
   }
 
   .category {
