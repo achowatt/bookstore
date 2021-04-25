@@ -9,7 +9,7 @@ const FooterSection = ({ setFooterShowing }) => {
 
   useEffect(() => {
     setFooterShowing(view);
-  }, [setFooterShowing, view]);
+  }, [view, setFooterShowing]);
 
   return (
     <Footer ref={element}>

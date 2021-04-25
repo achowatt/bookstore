@@ -49,7 +49,7 @@ const AppStyle = styled.div`
     min-height: calc(100vh - 40rem);
     @media screen and (max-width: 700px) {
       padding: 1rem;
-      padding-bottom: 2.5rem;
+      padding-bottom: 4.5rem;
     }
   }
 `;

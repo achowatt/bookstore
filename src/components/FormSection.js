@@ -119,6 +119,7 @@ const FormSection = ({ currentBookID, setCurrentBookID, setPopupOpen }) => {
         id="modify-book-description"
         value={inputDescription}
         onChange={editDescriptionHandler}
+        maxLength="200"
         required
       ></Textarea>
       <br />
@@ -153,7 +154,8 @@ const Select = styled.select`
   height: 2rem;
   width: 100%;
   border: solid 1px #ababab;
-  padding: 0.5rem;
+  -webkit-appearance: none;
+  padding-left: 0.5rem;
 `;
 
 const Textarea = styled.textarea`

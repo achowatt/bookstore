@@ -7,7 +7,6 @@ const bookListReducer = (state = initBookList, action) => {
   switch (action.type) {
     case "DELETE_BOOK":
       return state.filter((book) => book.id !== action.id);
-      break;
     case "MODIFY_BOOK":
       return state.map((book) => {
         if (book.id !== action.book.id) {
@@ -18,7 +17,6 @@ const bookListReducer = (state = initBookList, action) => {
           ...action.book,
         };
       });
-      break;
     case "ADD_BOOK":
       const newBook = {
         id: uuidv4(),

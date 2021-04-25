@@ -34,12 +34,7 @@ const BooklistSection = ({ setCurrentBookID, setPopupOpen }) => {
 
 const BookListContainer = styled.section`
   width: 100%;
-  padding: 1rem;
   text-align: center;
-
-  @media screen and (max-width: 700px) {
-    padding: 0rem;
-  }
 
   h2 {
     margin-bottom: 3rem;

@@ -49,7 +49,6 @@ const Popup = styled.section`
 `;
 
 const BookIdStyle = styled.p`
-  margin-bottom: 2rem;
   font-size: 0.9rem;
 `;
 
